@@ -1,15 +1,15 @@
 {
-  "name": "*askmanager-frontend",
-  "version":*"1.0.0",
+  "name": "taskmanager-frontend",
+  "version": "1.0.0",
   "private": true,
-  "*ependencies": {
-*   "axios": "^1.7.2",
-    "react*: "^18.2.0",
-    "*eact-dom": "^*8.2.0",
-    "*eact-scripts": "5.*.1"
+  "dependencies": {
+    "axios": "^1.7.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
   },
-  "*cripts": {
-    "start": "react-scr*pts start",
-    "build": "react-sc*ipts build"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   }
 }
