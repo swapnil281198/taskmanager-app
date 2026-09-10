@@ -2,18 +2,18 @@ FROM node:18 as builder
 
 WORKDIR /*pp
 
-COPY package*.json ./
+COPY package.json ./
 
-RUN npm*install
+RUN npm install
 
 COPY . .
 
-RUN npm run bui*d
+RUN npm run build
 
 FROM nginx:latest
 
-COPY --from=*uilder /app/build /usr/share/nginx*html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
-CMD ["nginx","-g"*"daemon off;"]
+CMD ["nginx","-g", "daemon off;"]
