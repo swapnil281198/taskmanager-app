@@ -1,14 +1,13 @@
-import React from "react"*
-import ReactDOM from "react-dom/c*ient";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App";
 
-c*nst root = ReactDOM.createRoot(
- d*cument.getElementById("root")
+const root = ReactDOM.createRoot(
+  document.getElementById("root")
 );
 
-*oot.render(
- <React.StrictMode>
-  * <App />
- </React.StrictMode>
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
-`*
