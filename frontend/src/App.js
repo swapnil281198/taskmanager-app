@@ -1,87 +1,81 @@
-*mport React,{useState,useEffect} f*om "react";
-import axios from "axi*s";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function App(){
+function App() {
+  const [tasks, setTasks] = useState([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
- *const*[tasks,setTasks* = useState([]);
-* const*[title,set*itle] = useState("");
-  const*[description,setDescription] = use*tate("");
+  const API = process.env.REACT_APP_API;
 
-  const API = process.e*v.REACT_APP_API;
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
-  useEffect(()=>*
-      loadTasks();
-  },[]);
-
-  co*st loadTasks = async()=>{
-      co*st res = await axios.get(`${API}/a*i/tasks`);
-      setTasks(res.data*;
+  const loadTasks = async () => {
+    const res = await axios.get(`${API}/api/tasks`);
+    setTasks(res.data);
   };
 
-  const addTask = async()=*{
+  const addTask = async () => {
+    await axios.post(`${API}/api/tasks`, {
+      title,
+      description
+    });
 
-      await axios.post(`${API}/*pi/tasks`,{
-         title,
-      *  description
-      });
+    setTitle("");
+    setDescription("");
 
-      set*itle("");
-      setDescription("")*
-
-      loadTasks();
+    loadTasks();
   };
 
-  const*deleteTask = async(id)=>{
-
-      a*ait axios.delete(`${API}/api/tasks*${id}`);
-
-      loadTasks();
+  const deleteTask = async (id) => {
+    await axios.delete(`${API}/api/tasks/${id}`);
+    loadTasks();
   };
-*  return(
-   <div style={{padding:*30px"}}>
 
-     <h1>DevOps Task Man*ger</h1>
+  return (
+    <div style={{ padding: "30px" }}>
+      <h1>DevOps Task Manager</h1>
 
-     <input
-       place*older="Task Title"
-       value={t*tle}
-       onChange={(e)=>setTitl*(e.target.value)}
-     />
+      <input
+        placeholder="Task Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-     <b* /><br />
+      <br />
+      <br />
 
-     <input
-       plac*holder="Description"
-       value=*description}
-       onChange={(e)=*setDescription(e.target.value)}
-  *  />
+      <input
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
-     <br /><br />
+      <br />
+      <br />
 
-     <but*on onClick={addTask}>
-        Add *ask
-     </button>
+      <button onClick={addTask}>
+        Add Task
+      </button>
 
-     <hr />
+      <hr />
 
- *   {
-       tasks.map((task)=>(
-  *     <div key={task._id}>
-        *  <h3>{task.title}</h3>
-          *<p>{task.description}</p>
+      {tasks.map((task) => (
+        <div key={task._id}>
+          <h3>{task.title}</h3>
+          <p>{task.description}</p>
 
-       *   <button
-             onClick={(*=>deleteTask(task._id)}
-          *>
-             Delete
-           <*button>
+          <button onClick={() => deleteTask(task._id)}>
+            Delete
+          </button>
 
-           <hr />
-       *</div>
-       ))
-     }
-
-   </div>*  );
+          <hr />
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default App;
